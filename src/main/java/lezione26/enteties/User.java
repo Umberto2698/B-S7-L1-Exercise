@@ -26,6 +26,7 @@ public class User {
     private String username;
     private String email;
     private String avatar;
+    private String password;
 
     @CreationTimestamp
     @Column(name = "creation_date")

@@ -2,7 +2,6 @@ package lezione26.controllers;
 
 import lezione26.enteties.User;
 import lezione26.exceptions.BadRequestException;
-import lezione26.payloads.users.UserDTO;
 import lezione26.payloads.users.UserUpdateInfoDTO;
 import lezione26.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,15 +33,6 @@ public class UserController {
         return userService.getById(id);
     }
 
-    @PostMapping("")
-    @ResponseStatus(HttpStatus.CREATED)
-    public User saveUser(@RequestBody @Validated UserDTO body, BindingResult validation) {
-        if (validation.hasErrors()) {
-            throw new BadRequestException(validation.getAllErrors());
-        } else {
-            return userService.save(body);
-        }
-    }
 
     @PutMapping("/{id}")
     public User updateUserInfo(@PathVariable UUID id, @RequestBody @Validated UserUpdateInfoDTO body, BindingResult validation) {

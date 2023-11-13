@@ -32,6 +32,11 @@ public class UserService {
         return userRepository.findAll(pageable);
     }
 
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new ItemNotFoundException(email));
+    }
+
     public User save(UserDTO body) {
         userRepository.findByEmail(body.email()).ifPresent(a -> {
             throw new BadRequestException("The email" + a.getEmail() + " is alredy used.");
