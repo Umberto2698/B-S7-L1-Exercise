@@ -7,11 +7,10 @@ import lezione26.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Component;
 
 import java.util.Locale;
 
-@Component
+//@Component
 @Order(1)
 public class AddUser implements CommandLineRunner {
 
@@ -28,8 +27,9 @@ public class AddUser implements CommandLineRunner {
             String name = faker.name().firstName();
             String surname = faker.name().lastName();
             String username = faker.funnyName().name();
+            String password = faker.phoneNumber().cellPhone();
             String email = name + "." + surname + "@gmail.com";
-            UserDTO user = new UserDTO(name, surname, username, email);
+            UserDTO user = new UserDTO(name, surname, username, password, email);
             userService.save(user);
         }
     }

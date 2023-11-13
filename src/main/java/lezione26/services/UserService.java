@@ -41,7 +41,7 @@ public class UserService {
         userRepository.findByEmail(body.email()).ifPresent(a -> {
             throw new BadRequestException("The email" + a.getEmail() + " is alredy used.");
         });
-        User user = User.builder().name(body.name()).email(body.email()).surname(body.surname()).build();
+        User user = User.builder().name(body.name()).email(body.email()).surname(body.surname()).password(body.password()).build();
         if (body.username().isEmpty()) {
             user.setUsername(body.name());
         } else {
@@ -64,6 +64,9 @@ public class UserService {
         }
         if (!body.username().isEmpty()) {
             found.setUsername(body.username());
+        }
+        if (!body.password().isEmpty()) {
+            found.setPassword(body.password());
         }
         return userRepository.save(found);
     }
